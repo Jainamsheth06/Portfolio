@@ -86,15 +86,10 @@
 <section class="stats-section">
     <div class="container stats-container">
         <div class="stat-card">
-            <div class="stat-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+            <div class="stat-icon"><i class="fa-solid fa-user-graduate"></i></div>
             <div class="stat-info">
-                {% if profile.experience_years == 0 %}
-                    <h3 class="stat-number">Fresher</h3>
-                    <p class="stat-label">Experience Level</p>
-                {% else %}
-                    <h3 class="stat-number" data-target="{{ profile.experience_years }}">{{ profile.experience_years }}+</h3>
-                    <p class="stat-label">Years of Experience</p>
-                {% endif %}
+                <h3 class="stat-number">Fresher</h3>
+                <p class="stat-label">Ready to Join</p>
             </div>
         </div>
 
@@ -102,23 +97,23 @@
             <div class="stat-icon"><i class="fa-solid fa-laptop-code"></i></div>
             <div class="stat-info">
                 <h3 class="stat-number" data-target="{{ profile.completed_projects }}">{{ profile.completed_projects }}+</h3>
-                <p class="stat-label">Projects Completed</p>
+                <p class="stat-label">Hands-on Projects</p>
             </div>
         </div>
 
         <div class="stat-card">
-            <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+            <div class="stat-icon"><i class="fa-solid fa-code"></i></div>
             <div class="stat-info">
-                <h3 class="stat-number" data-target="{{ profile.happy_clients }}">{{ profile.happy_clients }}+</h3>
-                <p class="stat-label">Satisfied Clients</p>
+                <h3 class="stat-number" data-target="15">15+</h3>
+                <p class="stat-label">Technologies Explored</p>
             </div>
         </div>
 
         <div class="stat-card">
-            <div class="stat-icon"><i class="fa-solid fa-star"></i></div>
+            <div class="stat-icon"><i class="fa-solid fa-certificate"></i></div>
             <div class="stat-info">
                 <h3 class="stat-number" data-target="{{ profile.satisfaction_rate }}">{{ profile.satisfaction_rate }}%</h3>
-                <p class="stat-label">Satisfaction Rate</p>
+                <p class="stat-label">Dedication & Drive</p>
             </div>
         </div>
     </div>
@@ -323,29 +318,30 @@
     </div>
 </section>
 
-<!-- ==================== EXPERIENCE & EDUCATION ==================== -->
-<section class="section experience-section" id="experience">
+<!-- ==================== EDUCATION & ACADEMICS ==================== -->
+<section class="section experience-section" id="education">
+    <div id="experience"></div>
     <div class="container">
-        <div class="section-header">
-            <span class="section-tag"><i class="fa-solid fa-briefcase"></i> Career Journey</span>
-            <h2 class="section-title">Experience & <span class="gradient-text">Education</span></h2>
-            <p class="section-subtitle">Track record of building software and continuous academic growth</p>
-        </div>
+        {% if experiences %}
+            <div class="section-header">
+                <span class="section-tag"><i class="fa-solid fa-briefcase"></i> Career Journey</span>
+                <h2 class="section-title">Experience & <span class="gradient-text">Education</span></h2>
+                <p class="section-subtitle">Track record of building software and continuous academic growth</p>
+            </div>
 
-        <!-- Section Switcher Tabs -->
-        <div class="timeline-tabs">
-            <button class="timeline-tab active" data-tab="work">
-                <i class="fa-solid fa-briefcase"></i> Work Experience
-            </button>
-            <button class="timeline-tab" data-tab="education">
-                <i class="fa-solid fa-graduation-cap"></i> Education & Certs
-            </button>
-        </div>
+            <!-- Section Switcher Tabs -->
+            <div class="timeline-tabs">
+                <button class="timeline-tab active" data-tab="work">
+                    <i class="fa-solid fa-briefcase"></i> Work Experience
+                </button>
+                <button class="timeline-tab" data-tab="education">
+                    <i class="fa-solid fa-graduation-cap"></i> Education & Certs
+                </button>
+            </div>
 
-        <!-- Work Experience Timeline -->
-        <div class="timeline-content active" id="tab-work">
-            <div class="timeline-track">
-                {% if experiences %}
+            <!-- Work Experience Timeline -->
+            <div class="timeline-content active" id="tab-work">
+                <div class="timeline-track">
                     {% for exp in experiences %}
                         <div class="timeline-node">
                             <div class="node-marker">
@@ -381,18 +377,12 @@
                             </div>
                         </div>
                     {% endfor %}
-                {% else %}
-                    <div class="empty-state">
-                        <p>No experiences added yet. Run the seeder to populate sample data!</p>
-                    </div>
-                {% endif %}
+                </div>
             </div>
-        </div>
 
-        <!-- Education Timeline -->
-        <div class="timeline-content" id="tab-education">
-            <div class="timeline-track">
-                {% if educations %}
+            <!-- Education Timeline -->
+            <div class="timeline-content" id="tab-education">
+                <div class="timeline-track">
                     {% for edu in educations %}
                         <div class="timeline-node">
                             <div class="node-marker">
@@ -422,13 +412,54 @@
                             </div>
                         </div>
                     {% endfor %}
-                {% else %}
-                    <div class="empty-state">
-                        <p>No education records added yet.</p>
-                    </div>
-                {% endif %}
+                </div>
             </div>
-        </div>
+        {% else %}
+            <!-- Direct Clean Education & Certifications Timeline for Fresher -->
+            <div class="section-header">
+                <span class="section-tag"><i class="fa-solid fa-graduation-cap"></i> Academic Background</span>
+                <h2 class="section-title">Education & <span class="gradient-text">Certifications</span></h2>
+                <p class="section-subtitle">Academic foundations, technical training, and hands-on software development</p>
+            </div>
+
+            <div class="timeline-content active" id="tab-education-direct">
+                <div class="timeline-track">
+                    {% for edu in educations %}
+                        <div class="timeline-node">
+                            <div class="node-marker">
+                                <i class="fa-solid fa-graduation-cap"></i>
+                            </div>
+                            <div class="node-card">
+                                <div class="node-header">
+                                    <div>
+                                        <h3 class="node-title">{{ edu.degree }}</h3>
+                                        <h4 class="node-subtitle">
+                                            {{ edu.institution }}
+                                            {% if edu.location %}
+                                                <span class="node-location"><i class="fa-solid fa-location-dot"></i> {{ edu.location }}</span>
+                                            {% endif %}
+                                        </h4>
+                                    </div>
+                                    <span class="node-period">{{ edu.start_year }} - {{ edu.end_year }}</span>
+                                </div>
+                                {% if edu.gpa %}
+                                    <div class="node-score"><i class="fa-solid fa-award"></i> Grade / Honors: {{ edu.gpa }}</div>
+                                {% endif %}
+                                {% if edu.description %}
+                                    <div class="node-body">
+                                        <p>{{ edu.description|linebreaksbr }}</p>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% empty %}
+                        <div class="empty-state">
+                            <p>No education records added yet.</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
     </div>
 </section>
 

@@ -18,12 +18,7 @@ def get_default_profile():
         'github_url': 'https://github.com',
         'linkedin_url': 'https://linkedin.com/in/Jainamsheth06',
         'twitter_url': 'https://x.com/jainam216sheth',
-        'leetcode_url': 'https://leetcode.com',
         'experience_years': 0,
-        'completed_projects': 10,
-        'happy_clients': 5,
-        'satisfaction_rate': 100,
-        'available_for_hire': True,
     }
 
 def index(request):

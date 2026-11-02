@@ -107,85 +107,42 @@ class Command(BaseCommand):
                 )
         self.stdout.write("Created Skill Categories and Skills.")
 
-        # 3. Work Experiences
+        # 3. Work Experiences (Fresher - Left empty)
         Experience.objects.all().delete()
-        experiences = [
-            {
-                "title": "Senior Full Stack Engineer",
-                "company": "Apex Cloud Systems",
-                "company_url": "https://example.com",
-                "location": "San Francisco, CA (Hybrid)",
-                "start_date": "Mar 2024",
-                "end_date": "Present",
-                "is_current": True,
-                "description": (
-                    "• Led architecture and development of scalable enterprise web portals utilizing Django, PostgreSQL, and modern JS.\n"
-                    "• Reduced page load times by 42% through query optimization, database indexing, and Redis caching layers.\n"
-                    "• Spearheaded CI/CD automation pipelines and Docker containerization across staging and production clusters."
-                ),
-                "technologies": "Django, Python, PostgreSQL, Docker, Redis, JavaScript ES6+, Nginx",
-                "order": 1
-            },
-            {
-                "title": "Django & Full Stack Developer",
-                "company": "Nexus Web Solutions",
-                "company_url": "https://example.com",
-                "location": "Remote",
-                "start_date": "Jan 2022",
-                "end_date": "Feb 2024",
-                "is_current": False,
-                "description": (
-                    "• Built 15+ custom web applications with complex user authentication, RBAC permissions, and real-time dashboard analytics.\n"
-                    "• Implemented Stripe and PayPal checkout integration with automated invoicing and webhooks.\n"
-                    "• Designed custom reusable UI component kits with CSS3 variables and vanilla JS, eliminating heavy external dependencies."
-                ),
-                "technologies": "Django, Python, SQLite/PostgreSQL, JavaScript, HTML5/CSS3, Stripe API",
-                "order": 2
-            },
-            {
-                "title": "Junior Python / Web Developer",
-                "company": "Horizon Interactive",
-                "company_url": "https://example.com",
-                "location": "Austin, TX",
-                "start_date": "Jun 2021",
-                "end_date": "Dec 2021",
-                "is_current": False,
-                "description": (
-                    "• Developed RESTful endpoints and database models for customer-facing web services.\n"
-                    "• Maintained responsive frontend templates ensuring cross-browser and mobile compatibility.\n"
-                    "• Wrote automated unit and integration tests achieving 85%+ code coverage across critical endpoints."
-                ),
-                "technologies": "Python, Django, HTML5, CSS3, JavaScript, Git, Pytest",
-                "order": 3
-            },
-        ]
+        self.stdout.write("Work Experience left empty (Fresher Profile).")
 
-        for exp in experiences:
-            Experience.objects.create(**exp)
-        self.stdout.write("Created Work Experiences.")
-
-        # 4. Education
+        # 4. Education & Certifications
         Education.objects.all().delete()
         educations = [
             {
-                "degree": "Bachelor of Science in Computer Science",
-                "institution": "University of California, Berkeley",
-                "location": "Berkeley, CA",
-                "start_year": "2017",
-                "end_year": "2021",
-                "gpa": "3.85 / 4.0",
-                "description": "Graduated with Honors. Coursework: Data Structures & Algorithms, Database Systems, Web Architecture, Operating Systems, Computer Security.",
+                "degree": "Bachelor of Computer Applications / Computer Science",
+                "institution": "Gujarat University / Institute of Technology",
+                "location": "Ahmedabad, Gujarat",
+                "start_year": "2023",
+                "end_year": "Present",
+                "gpa": "First Class",
+                "description": "Core Coursework: Python & Web Programming, Relational Database Management Systems (RDBMS), Data Structures, Algorithms, Software Engineering.",
                 "order": 1
             },
             {
-                "degree": "Professional Full Stack Web Certification",
-                "institution": "Django Software Guild & Python Institute",
+                "degree": "Full Stack Python & Django Web Development",
+                "institution": "Online Specialized Training & Hands-on Projects",
                 "location": "Online",
-                "start_year": "2021",
-                "end_year": "2022",
-                "gpa": "Distinction",
-                "description": "Comprehensive certification covering Advanced Django ORM, REST APIs, Microservices, Async Django, and Modern Frontend Integration.",
+                "start_year": "2024",
+                "end_year": "2024",
+                "gpa": "Certified",
+                "description": "Intensive hands-on practical track covering Django MVC architecture, RESTful API development, PostgreSQL, JavaScript DOM manipulation, and responsive web design.",
                 "order": 2
+            },
+            {
+                "degree": "Higher Secondary Certificate (HSC - 12th)",
+                "institution": "Gujarat Board (GSEB)",
+                "location": "Ahmedabad, Gujarat",
+                "start_year": "2021",
+                "end_year": "2023",
+                "gpa": "Distinction",
+                "description": "Completed Higher Secondary with focus on Science, Mathematics, and Computer Applications.",
+                "order": 3
             }
         ]
         for edu in educations:
