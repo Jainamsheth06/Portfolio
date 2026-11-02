@@ -1,18 +1,18 @@
 from django.db import models
 
 class Profile(models.Model):
-    full_name = models.CharField(max_length=120, default="Alex Morgan")
+    full_name = models.CharField(max_length=120, default="Jainam Sheth")
     title = models.CharField(max_length=200, default="Full Stack Developer & Software Engineer")
     subtitle_roles = models.CharField(
         max_length=300,
-        default="Full Stack Developer, Django Specialist, Python Engineer, UI/UX Artisan",
+        default="Full Stack Developer, Django Specialist, Python Engineer",
         help_text="Comma-separated roles for animated typewriter effect"
     )
     bio = models.TextField(
-        default="I build high-performance web applications, scalable backends, and intuitive user experiences with Django, modern JavaScript, and clean software architecture."
+        default="I architect robust backends, design intuitive frontends, and create seamless web experiences using Django, modern JavaScript, and clean coding standards."
     )
     about_text = models.TextField(
-        default="Hello! I'm a passionate developer with a strong foundation in full-stack web development. I specialize in building elegant, fast, and secure digital products. From designing relational database schemas and architecting RESTful APIs in Django to crafting fluid, responsive interfaces with HTML, CSS, and modern JavaScript, I love turning complex problems into clean, accessible code."
+        default="I am a dedicated software developer specializing in Python, Django, modern JavaScript, and responsive web design. I enjoy turning complex system designs into clean, maintainable, and user-centric web applications. Whether crafting RESTful APIs, optimizing relational databases, or styling pixel-perfect user interfaces, I bring technical precision and artistic care to every project."
     )
     avatar = models.ImageField(upload_to="profile/", blank=True, null=True)
     avatar_url = models.CharField(
@@ -22,19 +22,19 @@ class Profile(models.Model):
         help_text="Fallback photo URL if no local image is uploaded"
     )
     resume_file = models.FileField(upload_to="resumes/", blank=True, null=True)
-    email = models.EmailField(default="alex.morgan@example.com")
-    phone = models.CharField(max_length=40, default="+1 (555) 234-5678")
-    location = models.CharField(max_length=150, default="San Francisco, CA / Remote")
+    email = models.EmailField(default="jainamsheth2006@gmail.com")
+    phone = models.CharField(max_length=40, default="+91 9924377710")
+    location = models.CharField(max_length=150, default="Ahmedabad")
     github_url = models.URLField(default="https://github.com", blank=True)
-    linkedin_url = models.URLField(default="https://linkedin.com", blank=True)
-    twitter_url = models.URLField(default="https://x.com", blank=True)
+    linkedin_url = models.URLField(default="https://linkedin.com/in/Jainamsheth06", blank=True)
+    twitter_url = models.URLField(default="https://x.com/jainam216sheth", blank=True)
     leetcode_url = models.URLField(blank=True, default="https://leetcode.com")
     
     # Quick Stats
-    experience_years = models.PositiveIntegerField(default=4)
-    completed_projects = models.PositiveIntegerField(default=30)
-    happy_clients = models.PositiveIntegerField(default=22)
-    satisfaction_rate = models.PositiveIntegerField(default=99)
+    experience_years = models.PositiveIntegerField(default=0)
+    completed_projects = models.PositiveIntegerField(default=10)
+    happy_clients = models.PositiveIntegerField(default=5)
+    satisfaction_rate = models.PositiveIntegerField(default=100)
     available_for_hire = models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)
 

@@ -6,9 +6,9 @@ class PortfolioTests(TestCase):
     def setUp(self):
         self.client = Client()
         self.profile = Profile.objects.create(
-            full_name="Alex Morgan",
+            full_name="Jainam Sheth",
             title="Full Stack Software Engineer",
-            email="alex@example.com"
+            email="jainamsheth2006@gmail.com"
         )
         self.cat = ProjectCategory.objects.create(name="Full Stack", slug="full-stack")
         self.project = Project.objects.create(
@@ -24,7 +24,7 @@ class PortfolioTests(TestCase):
     def test_index_view_status_and_content(self):
         response = self.client.get(reverse('portfolio:index'))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Alex Morgan")
+        self.assertContains(response, "Jainam Sheth")
         self.assertContains(response, "Test Project")
         self.assertTemplateUsed(response, 'portfolio/index.html')
 

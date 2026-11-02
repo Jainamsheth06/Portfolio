@@ -10,28 +10,27 @@ class Command(BaseCommand):
         # 1. Profile
         Profile.objects.all().delete()
         profile = Profile.objects.create(
-            full_name="Alex Morgan",
-            title="Full Stack Software Engineer & Django Specialist",
-            subtitle_roles="Full Stack Developer, Django Specialist, Python Architect, Modern Web Artisan",
-            bio="Building high-performance, elegant web applications and robust scalable backend services with Django, Python, HTML5, CSS3, and JavaScript.",
+            full_name="Jainam Sheth",
+            title="Full Stack Developer & Software Engineer",
+            subtitle_roles="Full Stack Developer, Django Specialist, Python Engineer",
+            bio="I architect robust backends, design intuitive frontends, and create seamless web experiences using Django, modern JavaScript, and clean coding standards.",
             about_text=(
-                "I am a passionate Full Stack Software Engineer with over 4 years of experience architecting end-to-end web applications. "
-                "My core expertise revolves around the Python/Django ecosystem on the backend, complemented by modern, responsive frontend craftsmanship "
-                "using semantic HTML5, modern CSS3, and Vanilla/ES6+ JavaScript.\n\n"
-                "I care deeply about clean code architecture, performance optimization, accessibility, and intuitive UI/UX design. "
-                "When I'm not writing code, I enjoy mentoring junior developers, contributing to open-source software, and exploring emerging web standards."
+                "I am a dedicated software developer specializing in Python, Django, modern JavaScript, and responsive web design. "
+                "I enjoy turning complex system designs into clean, maintainable, and user-centric web applications. "
+                "Whether crafting RESTful APIs, optimizing relational databases, or styling pixel-perfect user interfaces, "
+                "I bring technical precision and artistic care to every project."
             ),
             avatar_url="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80",
-            email="alex.morgan.dev@example.com",
-            phone="+1 (555) 234-5678",
-            location="San Francisco, CA / Remote",
+            email="jainamsheth2006@gmail.com",
+            phone="+91 9924377710",
+            location="Ahmedabad",
             github_url="https://github.com",
-            linkedin_url="https://linkedin.com",
-            twitter_url="https://x.com",
+            linkedin_url="https://linkedin.com/in/Jainamsheth06",
+            twitter_url="https://x.com/jainam216sheth",
             leetcode_url="https://leetcode.com",
-            experience_years=4,
-            completed_projects=28,
-            happy_clients=19,
+            experience_years=0,
+            completed_projects=10,
+            happy_clients=5,
             satisfaction_rate=100,
             available_for_hire=True,
             is_active=True

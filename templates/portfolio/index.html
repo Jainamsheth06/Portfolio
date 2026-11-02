@@ -86,10 +86,15 @@
 <section class="stats-section">
     <div class="container stats-container">
         <div class="stat-card">
-            <div class="stat-icon"><i class="fa-solid fa-calendar-check"></i></div>
+            <div class="stat-icon"><i class="fa-solid fa-graduation-cap"></i></div>
             <div class="stat-info">
-                <h3 class="stat-number" data-target="{{ profile.experience_years }}">{{ profile.experience_years }}+</h3>
-                <p class="stat-label">Years of Experience</p>
+                {% if profile.experience_years == 0 %}
+                    <h3 class="stat-number">Fresher</h3>
+                    <p class="stat-label">Experience Level</p>
+                {% else %}
+                    <h3 class="stat-number" data-target="{{ profile.experience_years }}">{{ profile.experience_years }}+</h3>
+                    <p class="stat-label">Years of Experience</p>
+                {% endif %}
             </div>
         </div>
 
@@ -199,12 +204,12 @@
                             <span class="info-val">{{ profile.phone }}</span>
                         </div>
                         <div class="info-row">
-                            <span class="info-label"><i class="fa-solid fa-briefcase"></i> Employment:</span>
-                            <span class="info-val status-active">Available Full-Time / Freelance</span>
+                            <span class="info-label"><i class="fa-solid fa-briefcase"></i> Status:</span>
+                            <span class="info-val status-active">Fresher • Ready to Join</span>
                         </div>
                         <div class="info-row">
                             <span class="info-label"><i class="fa-solid fa-language"></i> Languages:</span>
-                            <span class="info-val">English (Fluent), Spanish</span>
+                            <span class="info-val">English, Hindi, Gujarati</span>
                         </div>
                         <div class="info-row">
                             <span class="info-label"><i class="fa-solid fa-code-branch"></i> Core Stack:</span>
