@@ -18,7 +18,7 @@ def get_default_profile():
         'about_text': "I am a dedicated software developer specializing in Python, Django, modern JavaScript, and responsive web design. I enjoy turning complex system designs into clean, maintainable, and user-centric web applications. Whether crafting RESTful APIs, optimizing relational databases, or styling pixel-perfect user interfaces, I bring technical precision and artistic care to every project.",
         'avatar_url': 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80',
         'email': 'jainamsheth2006@gmail.com',
-        'phone': '+91 9924377710',
+        'phone': '9924377710',
         'location': 'Ahmedabad',
         'github_url': 'https://github.com/Jainamsheth06',
         'linkedin_url': 'https://www.linkedin.com/in/jainam--sheth',

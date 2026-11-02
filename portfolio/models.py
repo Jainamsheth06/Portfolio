@@ -23,7 +23,7 @@ class Profile(models.Model):
     )
     resume_file = models.FileField(upload_to="resumes/", blank=True, null=True)
     email = models.EmailField(default="jainamsheth2006@gmail.com")
-    phone = models.CharField(max_length=40, default="+91 9924377710")
+    phone = models.CharField(max_length=40, default="9924377710")
     location = models.CharField(max_length=150, default="Ahmedabad")
     github_url = models.URLField(default="https://github.com/Jainamsheth06", blank=True)
     linkedin_url = models.URLField(default="https://www.linkedin.com/in/jainam--sheth", blank=True)
