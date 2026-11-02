@@ -8,3 +8,4 @@ urlpatterns = [
     path('contact/submit/', views.contact_submit, name='contact_submit'),
     path('api/projects/<slug:slug>/', views.project_detail_api, name='project_detail_api'),
 ]
+

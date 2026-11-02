@@ -32,3 +32,4 @@ class ContactForm(forms.ModelForm):
                 'id': 'contact-message'
             }),
         }
+

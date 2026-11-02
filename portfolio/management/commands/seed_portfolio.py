@@ -348,3 +348,4 @@ class Command(BaseCommand):
             Project.objects.create(category=cat, **p_data)
 
         self.stdout.write(self.style.SUCCESS("Successfully seeded rich portfolio database!"))
+
