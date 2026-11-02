@@ -1,8 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from django.contrib import messages
+from django.core.mail import send_mail
+from django.conf import settings
+import logging
 from .models import Profile, SkillCategory, Skill, Education, ProjectCategory, Project, ContactMessage
 from .forms import ContactForm
+
+logger = logging.getLogger(__name__)
 
 def get_default_profile():
     return {
@@ -52,13 +57,41 @@ def contact_submit(request):
 
         if form.is_valid():
             contact = form.save()
-            msg = f"Thank you, {contact.name}! Your message has been received. I will get back to you shortly."
+
+            # Send Email via Gmail SMTP directly to Jainam Sheth
+            email_sent = False
+            try:
+                recipient = getattr(settings, 'RECIPIENT_EMAIL', settings.EMAIL_HOST_USER)
+                email_subject = f"[Portfolio Contact] {contact.subject} - {contact.name}"
+                email_body = (
+                    f"Hello Jainam,\n\n"
+                    f"You have received a new contact inquiry from your portfolio website!\n\n"
+                    f"--------------------------------------------------\n"
+                    f"Sender Name : {contact.name}\n"
+                    f"Sender Email: {contact.email}\n"
+                    f"Subject     : {contact.subject}\n"
+                    f"--------------------------------------------------\n\n"
+                    f"Message:\n{contact.message}\n\n"
+                    f"--------------------------------------------------\n"
+                    f"Reply directly to: {contact.email}\n"
+                )
+                send_mail(
+                    subject=email_subject,
+                    message=email_body,
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=[recipient],
+                    fail_silently=False,
+                )
+                email_sent = True
+            except Exception as e:
+                logger.error(f"Error delivering email via SMTP: {e}")
+
+            msg = f"Thank you, {contact.name}! Your message has been sent directly to my email. I will get back to you shortly."
             if is_ajax:
-                return JsonResponse({'status': 'success', 'message': msg})
+                return JsonResponse({'status': 'success', 'message': msg, 'email_sent': email_sent})
             messages.success(request, msg)
             return redirect('/#contact')
         else:
-            errors = form.errors.as_json()
             if is_ajax:
                 return JsonResponse({'status': 'error', 'errors': form.errors}, status=400)
             messages.error(request, "There was an error in your submission. Please check the fields and try again.")

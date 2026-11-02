@@ -1,5 +1,6 @@
 from django.test import TestCase, Client
 from django.urls import reverse
+from django.core import mail
 from portfolio.models import Profile, SkillCategory, Skill, Education, ProjectCategory, Project, ContactMessage
 
 class PortfolioTests(TestCase):
@@ -44,6 +45,10 @@ class PortfolioTests(TestCase):
         json_data = response.json()
         self.assertEqual(json_data['status'], 'success')
         self.assertTrue(ContactMessage.objects.filter(email='jane@example.com').exists())
+        # Verify email was generated and delivered to outbox
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertIn("jainamsheth2006@gmail.com", mail.outbox[0].to)
+        self.assertIn("Project Inquiry", mail.outbox[0].subject)
 
     def test_contact_submit_ajax_invalid(self):
         # Missing required email and message
