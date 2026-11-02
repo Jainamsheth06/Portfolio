@@ -1,6 +1,6 @@
 from django.test import TestCase, Client
 from django.urls import reverse
-from portfolio.models import Profile, SkillCategory, Skill, Experience, Education, ProjectCategory, Project, ContactMessage
+from portfolio.models import Profile, SkillCategory, Skill, Education, ProjectCategory, Project, ContactMessage
 
 class PortfolioTests(TestCase):
     def setUp(self):

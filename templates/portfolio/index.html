@@ -320,146 +320,50 @@
 
 <!-- ==================== EDUCATION & ACADEMICS ==================== -->
 <section class="section experience-section" id="education">
-    <div id="experience"></div>
     <div class="container">
-        {% if experiences %}
-            <div class="section-header">
-                <span class="section-tag"><i class="fa-solid fa-briefcase"></i> Career Journey</span>
-                <h2 class="section-title">Experience & <span class="gradient-text">Education</span></h2>
-                <p class="section-subtitle">Track record of building software and continuous academic growth</p>
-            </div>
+        <div class="section-header">
+            <span class="section-tag"><i class="fa-solid fa-graduation-cap"></i> Academic Background</span>
+            <h2 class="section-title">Education & <span class="gradient-text">Certifications</span></h2>
+            <p class="section-subtitle">Academic foundations, technical training, and hands-on software development</p>
+        </div>
 
-            <!-- Section Switcher Tabs -->
-            <div class="timeline-tabs">
-                <button class="timeline-tab active" data-tab="work">
-                    <i class="fa-solid fa-briefcase"></i> Work Experience
-                </button>
-                <button class="timeline-tab" data-tab="education">
-                    <i class="fa-solid fa-graduation-cap"></i> Education & Certs
-                </button>
-            </div>
-
-            <!-- Work Experience Timeline -->
-            <div class="timeline-content active" id="tab-work">
-                <div class="timeline-track">
-                    {% for exp in experiences %}
-                        <div class="timeline-node">
-                            <div class="node-marker">
-                                <i class="fa-solid fa-circle-dot"></i>
-                            </div>
-                            <div class="node-card">
-                                <div class="node-header">
-                                    <div>
-                                        <h3 class="node-title">{{ exp.title }}</h3>
-                                        <h4 class="node-subtitle">
-                                            {% if exp.company_url %}
-                                                <a href="{{ exp.company_url }}" target="_blank" rel="noopener">{{ exp.company }}</a>
-                                            {% else %}
-                                                {{ exp.company }}
-                                            {% endif %}
-                                            <span class="node-location"><i class="fa-solid fa-location-dot"></i> {{ exp.location }}</span>
-                                        </h4>
-                                    </div>
-                                    <span class="node-period {% if exp.is_current %}current-badge{% endif %}">
-                                        {{ exp.start_date }} - {{ exp.end_date }}
-                                    </span>
+        <div class="timeline-content active" id="tab-education-direct">
+            <div class="timeline-track">
+                {% for edu in educations %}
+                    <div class="timeline-node">
+                        <div class="node-marker">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <div class="node-card">
+                            <div class="node-header">
+                                <div>
+                                    <h3 class="node-title">{{ edu.degree }}</h3>
+                                    <h4 class="node-subtitle">
+                                        {{ edu.institution }}
+                                        {% if edu.location %}
+                                            <span class="node-location"><i class="fa-solid fa-location-dot"></i> {{ edu.location }}</span>
+                                        {% endif %}
+                                    </h4>
                                 </div>
+                                <span class="node-period">{{ edu.start_year }} - {{ edu.end_year }}</span>
+                            </div>
+                            {% if edu.gpa %}
+                                <div class="node-score"><i class="fa-solid fa-award"></i> Grade / Honors: {{ edu.gpa }}</div>
+                            {% endif %}
+                            {% if edu.description %}
                                 <div class="node-body">
-                                    <p>{{ exp.description|linebreaksbr }}</p>
+                                    <p>{{ edu.description|linebreaksbr }}</p>
                                 </div>
-                                {% if exp.technologies %}
-                                    <div class="node-tags">
-                                        {% for tag in exp.technologies.split %}
-                                            <span class="tech-tag">{{ tag|cut:"," }}</span>
-                                        {% endfor %}
-                                    </div>
-                                {% endif %}
-                            </div>
+                            {% endif %}
                         </div>
-                    {% endfor %}
-                </div>
+                    </div>
+                {% empty %}
+                    <div class="empty-state">
+                        <p>No education records added yet.</p>
+                    </div>
+                {% endfor %}
             </div>
-
-            <!-- Education Timeline -->
-            <div class="timeline-content" id="tab-education">
-                <div class="timeline-track">
-                    {% for edu in educations %}
-                        <div class="timeline-node">
-                            <div class="node-marker">
-                                <i class="fa-solid fa-graduation-cap"></i>
-                            </div>
-                            <div class="node-card">
-                                <div class="node-header">
-                                    <div>
-                                        <h3 class="node-title">{{ edu.degree }}</h3>
-                                        <h4 class="node-subtitle">
-                                            {{ edu.institution }}
-                                            {% if edu.location %}
-                                                <span class="node-location"><i class="fa-solid fa-location-dot"></i> {{ edu.location }}</span>
-                                            {% endif %}
-                                        </h4>
-                                    </div>
-                                    <span class="node-period">{{ edu.start_year }} - {{ edu.end_year }}</span>
-                                </div>
-                                {% if edu.gpa %}
-                                    <div class="node-score"><i class="fa-solid fa-award"></i> Grade / Honors: {{ edu.gpa }}</div>
-                                {% endif %}
-                                {% if edu.description %}
-                                    <div class="node-body">
-                                        <p>{{ edu.description|linebreaksbr }}</p>
-                                    </div>
-                                {% endif %}
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-        {% else %}
-            <!-- Direct Clean Education & Certifications Timeline for Fresher -->
-            <div class="section-header">
-                <span class="section-tag"><i class="fa-solid fa-graduation-cap"></i> Academic Background</span>
-                <h2 class="section-title">Education & <span class="gradient-text">Certifications</span></h2>
-                <p class="section-subtitle">Academic foundations, technical training, and hands-on software development</p>
-            </div>
-
-            <div class="timeline-content active" id="tab-education-direct">
-                <div class="timeline-track">
-                    {% for edu in educations %}
-                        <div class="timeline-node">
-                            <div class="node-marker">
-                                <i class="fa-solid fa-graduation-cap"></i>
-                            </div>
-                            <div class="node-card">
-                                <div class="node-header">
-                                    <div>
-                                        <h3 class="node-title">{{ edu.degree }}</h3>
-                                        <h4 class="node-subtitle">
-                                            {{ edu.institution }}
-                                            {% if edu.location %}
-                                                <span class="node-location"><i class="fa-solid fa-location-dot"></i> {{ edu.location }}</span>
-                                            {% endif %}
-                                        </h4>
-                                    </div>
-                                    <span class="node-period">{{ edu.start_year }} - {{ edu.end_year }}</span>
-                                </div>
-                                {% if edu.gpa %}
-                                    <div class="node-score"><i class="fa-solid fa-award"></i> Grade / Honors: {{ edu.gpa }}</div>
-                                {% endif %}
-                                {% if edu.description %}
-                                    <div class="node-body">
-                                        <p>{{ edu.description|linebreaksbr }}</p>
-                                    </div>
-                                {% endif %}
-                            </div>
-                        </div>
-                    {% empty %}
-                        <div class="empty-state">
-                            <p>No education records added yet.</p>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-        {% endif %}
+        </div>
     </div>
 </section>
 

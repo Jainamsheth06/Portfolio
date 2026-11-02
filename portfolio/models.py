@@ -25,13 +25,11 @@ class Profile(models.Model):
     email = models.EmailField(default="jainamsheth2006@gmail.com")
     phone = models.CharField(max_length=40, default="+91 9924377710")
     location = models.CharField(max_length=150, default="Ahmedabad")
-    github_url = models.URLField(default="https://github.com", blank=True)
-    linkedin_url = models.URLField(default="https://linkedin.com/in/Jainamsheth06", blank=True)
+    github_url = models.URLField(default="https://github.com/Jainamsheth06", blank=True)
+    linkedin_url = models.URLField(default="https://www.linkedin.com/in/jainam--sheth", blank=True)
     twitter_url = models.URLField(default="https://x.com/jainam216sheth", blank=True)
-    leetcode_url = models.URLField(blank=True, default="https://leetcode.com")
     
     # Quick Stats
-    experience_years = models.PositiveIntegerField(default=0)
     completed_projects = models.PositiveIntegerField(default=10)
     happy_clients = models.PositiveIntegerField(default=5)
     satisfaction_rate = models.PositiveIntegerField(default=100)
@@ -71,25 +69,6 @@ class Skill(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.category.name})"
-
-
-class Experience(models.Model):
-    title = models.CharField(max_length=150)
-    company = models.CharField(max_length=150)
-    company_url = models.URLField(blank=True)
-    location = models.CharField(max_length=150, blank=True, default="Remote")
-    start_date = models.CharField(max_length=50)
-    end_date = models.CharField(max_length=50, default="Present")
-    is_current = models.BooleanField(default=False)
-    description = models.TextField(help_text="Key responsibilities and achievements")
-    technologies = models.CharField(max_length=300, help_text="Comma-separated technologies used")
-    order = models.PositiveIntegerField(default=0)
-
-    class Meta:
-        ordering = ['order', '-id']
-
-    def __str__(self):
-        return f"{self.title} at {self.company}"
 
 
 class Education(models.Model):

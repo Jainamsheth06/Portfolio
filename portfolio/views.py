@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from django.contrib import messages
-from .models import Profile, SkillCategory, Skill, Experience, Education, ProjectCategory, Project, ContactMessage
+from .models import Profile, SkillCategory, Skill, Education, ProjectCategory, Project, ContactMessage
 from .forms import ContactForm
 
 def get_default_profile():
@@ -15,10 +15,13 @@ def get_default_profile():
         'email': 'jainamsheth2006@gmail.com',
         'phone': '+91 9924377710',
         'location': 'Ahmedabad',
-        'github_url': 'https://github.com',
-        'linkedin_url': 'https://linkedin.com/in/Jainamsheth06',
+        'github_url': 'https://github.com/Jainamsheth06',
+        'linkedin_url': 'https://www.linkedin.com/in/jainam--sheth',
         'twitter_url': 'https://x.com/jainam216sheth',
-        'experience_years': 0,
+        'completed_projects': 10,
+        'happy_clients': 5,
+        'satisfaction_rate': 100,
+        'available_for_hire': True,
     }
 
 def index(request):
@@ -27,7 +30,6 @@ def index(request):
         profile = get_default_profile()
 
     categories = SkillCategory.objects.prefetch_related('skills').all()
-    experiences = Experience.objects.all()
     educations = Education.objects.all()
     project_categories = ProjectCategory.objects.all()
     projects = Project.objects.select_related('category').all()
@@ -36,7 +38,6 @@ def index(request):
     context = {
         'profile': profile,
         'skill_categories': categories,
-        'experiences': experiences,
         'educations': educations,
         'project_categories': project_categories,
         'projects': projects,

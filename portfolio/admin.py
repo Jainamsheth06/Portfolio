@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile, SkillCategory, Skill, Experience, Education, ProjectCategory, Project, ContactMessage
+from .models import Profile, SkillCategory, Skill, Education, ProjectCategory, Project, ContactMessage
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
@@ -17,13 +17,6 @@ class SkillAdmin(admin.ModelAdmin):
     list_filter = ('category',)
     list_editable = ('percentage', 'order')
     search_fields = ('name',)
-
-@admin.register(Experience)
-class ExperienceAdmin(admin.ModelAdmin):
-    list_display = ('title', 'company', 'start_date', 'end_date', 'is_current', 'order')
-    list_filter = ('is_current',)
-    list_editable = ('order',)
-    search_fields = ('title', 'company', 'technologies')
 
 @admin.register(Education)
 class EducationAdmin(admin.ModelAdmin):

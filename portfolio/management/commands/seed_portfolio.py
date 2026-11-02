@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from portfolio.models import Profile, SkillCategory, Skill, Experience, Education, ProjectCategory, Project
+from portfolio.models import Profile, SkillCategory, Skill, Education, ProjectCategory, Project
 
 class Command(BaseCommand):
     help = "Seed database with initial portfolio data"
@@ -24,11 +24,9 @@ class Command(BaseCommand):
             email="jainamsheth2006@gmail.com",
             phone="+91 9924377710",
             location="Ahmedabad",
-            github_url="https://github.com",
-            linkedin_url="https://linkedin.com/in/Jainamsheth06",
+            github_url="https://github.com/Jainamsheth06",
+            linkedin_url="https://www.linkedin.com/in/jainam--sheth",
             twitter_url="https://x.com/jainam216sheth",
-            leetcode_url="https://leetcode.com",
-            experience_years=0,
             completed_projects=10,
             happy_clients=5,
             satisfaction_rate=100,
@@ -107,11 +105,7 @@ class Command(BaseCommand):
                 )
         self.stdout.write("Created Skill Categories and Skills.")
 
-        # 3. Work Experiences (Fresher - Left empty)
-        Experience.objects.all().delete()
-        self.stdout.write("Work Experience left empty (Fresher Profile).")
-
-        # 4. Education & Certifications
+        # 3. Education & Certifications
         Education.objects.all().delete()
         educations = [
             {
