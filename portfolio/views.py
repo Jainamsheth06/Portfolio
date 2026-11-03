@@ -74,7 +74,11 @@ def contact_submit(request):
         is_ajax = request.headers.get('x-requested-with') == 'XMLHttpRequest' or 'application/json' in request.headers.get('Accept', '')
 
         if form.is_valid():
-            contact = form.save()
+            try:
+                contact = form.save()
+            except Exception as db_err:
+                logger.warning(f"Database write skipped on read-only filesystem: {db_err}")
+                contact = form.save(commit=False)
 
             # Prepare email notification
             recipient = getattr(settings, 'RECIPIENT_EMAIL', settings.EMAIL_HOST_USER)
