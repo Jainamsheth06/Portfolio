@@ -26,6 +26,7 @@ class Command(BaseCommand):
             location="Ahmedabad",
             github_url="https://github.com/Jainamsheth06",
             linkedin_url="https://www.linkedin.com/in/jainam--sheth",
+            instagram_url="https://www.instagram.com/mr_jainamsheth",
             twitter_url="https://x.com/jainam216sheth",
             completed_projects=5,
             happy_clients=5,

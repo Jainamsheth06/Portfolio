@@ -42,7 +42,7 @@
                 <div class="social-icons">
                     {% if profile.github_url %}<a href="{{ profile.github_url }}" target="_blank" rel="noopener noreferrer" title="GitHub" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>{% endif %}
                     {% if profile.linkedin_url %}<a href="{{ profile.linkedin_url }}" target="_blank" rel="noopener noreferrer" title="LinkedIn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>{% endif %}
-                    {% if profile.instagram_url %}<a href="{{ profile.instagram_url }}" target="_blank" rel="noopener noreferrer" title="Instagram" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>{% endif %}
+                    <a href="{{ profile.instagram_url|default:'https://www.instagram.com/mr_jainamsheth' }}" target="_blank" rel="noopener noreferrer" title="Instagram" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
                     {% if profile.twitter_url %}<a href="{{ profile.twitter_url }}" target="_blank" rel="noopener noreferrer" title="Twitter/X" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>{% endif %}
                     <a href="mailto:{{ profile.email }}" title="Email me" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
                     <a href="https://wa.me/{{ profile.whatsapp_number }}" target="_blank" rel="noopener noreferrer" title="Chat on WhatsApp" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
@@ -515,9 +515,10 @@
                 <div class="contact-social-box">
                     <span class="social-box-title">Follow & Network:</span>
                     <div class="contact-social-icons">
-                        {% if profile.github_url %}<a href="{{ profile.github_url }}" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a>{% endif %}
-                        {% if profile.linkedin_url %}<a href="{{ profile.linkedin_url }}" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>{% endif %}
-                        {% if profile.twitter_url %}<a href="{{ profile.twitter_url }}" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i></a>{% endif %}
+                        {% if profile.github_url %}<a href="{{ profile.github_url }}" target="_blank" rel="noopener" title="GitHub"><i class="fa-brands fa-github"></i></a>{% endif %}
+                        {% if profile.linkedin_url %}<a href="{{ profile.linkedin_url }}" target="_blank" rel="noopener" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>{% endif %}
+                        <a href="{{ profile.instagram_url|default:'https://www.instagram.com/mr_jainamsheth' }}" target="_blank" rel="noopener" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        {% if profile.twitter_url %}<a href="{{ profile.twitter_url }}" target="_blank" rel="noopener" title="Twitter/X"><i class="fa-brands fa-x-twitter"></i></a>{% endif %}
                         <a href="https://wa.me/{{ profile.whatsapp_number }}" target="_blank" rel="noopener" title="Chat on WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
                     </div>
                 </div>

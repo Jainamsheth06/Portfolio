@@ -27,6 +27,7 @@ class Profile(models.Model):
     location = models.CharField(max_length=150, default="Ahmedabad")
     github_url = models.URLField(default="https://github.com/Jainamsheth06", blank=True)
     linkedin_url = models.URLField(default="https://www.linkedin.com/in/jainam--sheth", blank=True)
+    instagram_url = models.URLField(default="https://www.instagram.com/mr_jainamsheth", blank=True)
     twitter_url = models.URLField(default="https://x.com/jainam216sheth", blank=True)
     
     # Quick Stats
