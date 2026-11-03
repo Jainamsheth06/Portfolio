@@ -132,7 +132,7 @@
                     <div class="footer-social-links">
                         {% if profile.github_url %}<a href="{{ profile.github_url }}" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>{% endif %}
                         {% if profile.linkedin_url %}<a href="{{ profile.linkedin_url }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>{% endif %}
-                        <a href="{{ profile.instagram_url }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="{{ profile.instagram_url|default:'https://www.instagram.com/mr_jainamsheth' }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
                         {% if profile.twitter_url %}<a href="{{ profile.twitter_url }}" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter"><i class="fa-brands fa-x-twitter"></i></a>{% endif %}
                         <a href="mailto:{{ profile.email }}" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
                         <a href="https://wa.me/{{ profile.whatsapp_number }}" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>

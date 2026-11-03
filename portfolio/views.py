@@ -34,19 +34,6 @@ def get_default_profile():
         'available_for_hire': True,
     }
 
-def send_async_email(subject, message, from_email, recipient_list):
-    """Sends email in background thread without blocking the user response."""
-    try:
-        send_mail(
-            subject=subject,
-            message=message,
-            from_email=from_email,
-            recipient_list=recipient_list,
-            fail_silently=False,
-        )
-    except Exception as e:
-        logger.error(f"Error delivering email via SMTP: {e}")
-
 def index(request):
     profile = Profile.objects.filter(is_active=True).first()
     if not profile:
@@ -96,15 +83,20 @@ def contact_submit(request):
                 f"Reply directly to: {contact.email}\n"
             )
 
-            # Fire email in background daemon thread for instant user feedback
-            email_thread = threading.Thread(
-                target=send_async_email,
-                args=(email_subject, email_body, settings.DEFAULT_FROM_EMAIL, [recipient]),
-                daemon=True
-            )
-            email_thread.start()
-            if 'test' in sys.argv:
-                email_thread.join(timeout=2.0)
+            # Deliver email notification via Gmail SMTP synchronously so Vercel serverless function does not freeze before delivery
+            email_sent = False
+            try:
+                send_mail(
+                    subject=email_subject,
+                    message=email_body,
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=[recipient],
+                    fail_silently=False,
+                )
+                email_sent = True
+                logger.info(f"Contact email successfully delivered to {recipient}")
+            except Exception as e:
+                logger.error(f"Error delivering email via SMTP: {e}")
 
             msg = f"Thank you, {contact.name}! Your message has been sent directly to my email. I will get back to you shortly."
             if is_ajax:
