@@ -18,19 +18,19 @@ class Profile(models.Model):
     avatar_url = models.CharField(
         max_length=500,
         blank=True,
-        default="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80",
+        default="/static/images/profile.png",
         help_text="Fallback photo URL if no local image is uploaded"
     )
     resume_file = models.FileField(upload_to="resumes/", blank=True, null=True)
     email = models.EmailField(default="jainamsheth2006@gmail.com")
-    phone = models.CharField(max_length=40, default="9924377710")
+    phone = models.CharField(max_length=40, default="+91 9924377710")
     location = models.CharField(max_length=150, default="Ahmedabad")
     github_url = models.URLField(default="https://github.com/Jainamsheth06", blank=True)
     linkedin_url = models.URLField(default="https://www.linkedin.com/in/jainam--sheth", blank=True)
     twitter_url = models.URLField(default="https://x.com/jainam216sheth", blank=True)
     
     # Quick Stats
-    completed_projects = models.PositiveIntegerField(default=10)
+    completed_projects = models.PositiveIntegerField(default=5)
     happy_clients = models.PositiveIntegerField(default=5)
     satisfaction_rate = models.PositiveIntegerField(default=100)
     available_for_hire = models.BooleanField(default=True)
@@ -42,6 +42,16 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.full_name
+
+    @property
+    def phone_clean(self):
+        """Returns normalized phone digits with country code without spaces for tel: protocol."""
+        return self.phone.replace(" ", "").replace("-", "") if self.phone else ""
+
+    @property
+    def whatsapp_number(self):
+        """Returns numeric digits only for WhatsApp wa.me links."""
+        return self.phone.replace("+", "").replace(" ", "").replace("-", "") if self.phone else ""
 
 
 class SkillCategory(models.Model):

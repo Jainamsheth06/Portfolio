@@ -20,18 +20,17 @@ class Command(BaseCommand):
                 "Whether crafting RESTful APIs, optimizing relational databases, or styling pixel-perfect user interfaces, "
                 "I bring technical precision and artistic care to every project."
             ),
-            avatar_url="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80",
+            avatar_url="/static/images/profile.png",
             email="jainamsheth2006@gmail.com",
-            phone="9924377710",
+            phone="+91 9924377710",
             location="Ahmedabad",
             github_url="https://github.com/Jainamsheth06",
             linkedin_url="https://www.linkedin.com/in/jainam--sheth",
             twitter_url="https://x.com/jainam216sheth",
-            completed_projects=10,
+            completed_projects=5,
             happy_clients=5,
             satisfaction_rate=100,
             available_for_hire=True,
-            is_active=True
         )
         self.stdout.write(f"Created Profile: {profile.full_name}")
 
@@ -47,8 +46,7 @@ class Command(BaseCommand):
                     ("Python", 95, "fa-brands fa-python"),
                     ("Django / Django REST Framework", 92, "fa-solid fa-code"),
                     ("RESTful API Architecture", 90, "fa-solid fa-network-wired"),
-                    ("PostgreSQL / SQLite", 88, "fa-solid fa-database"),
-                    ("Celery & Redis Caching", 82, "fa-solid fa-bolt"),
+                    ("SQL & SQLite", 88, "fa-solid fa-database"),
                 ]
             },
             {
@@ -64,27 +62,23 @@ class Command(BaseCommand):
                 ]
             },
             {
-                "category": "DevOps & Cloud",
-                "icon": "fa-solid fa-cloud",
+                "category": "Tools & Version Control",
+                "icon": "fa-solid fa-code-branch",
                 "order": 3,
                 "skills": [
-                    ("Docker & Containerization", 80, "fa-brands fa-docker"),
                     ("Git & Version Control", 92, "fa-brands fa-git-alt"),
-                    ("Linux & Bash Scripting", 84, "fa-brands fa-linux"),
                     ("CI/CD Pipelines (GitHub Actions)", 78, "fa-solid fa-gears"),
-                    ("Nginx & Gunicorn Deployment", 82, "fa-solid fa-server"),
                 ]
             },
             {
-                "category": "Methodologies & Tools",
-                "icon": "fa-solid fa-screwdriver-wrench",
+                "category": "Soft Skills",
+                "icon": "fa-solid fa-lightbulb",
                 "order": 4,
                 "skills": [
-                    ("Agile / Scrum Collaboration", 90, "fa-solid fa-people-group"),
-                    ("Unit Testing & Pytest", 86, "fa-solid fa-vial-circle-check"),
-                    ("Web Security & CSRF/XSS Defense", 88, "fa-solid fa-shield-halved"),
-                    ("Performance Optimization & SEO", 85, "fa-solid fa-chart-line"),
-                    ("Postman & API Documentation", 90, "fa-solid fa-book"),
+                    ("Logical Thinking", 92, "fa-solid fa-brain"),
+                    ("Problem Solving", 95, "fa-solid fa-puzzle-piece"),
+                    ("Team Work", 90, "fa-solid fa-people-group"),
+                    ("Oral & Written Communication", 88, "fa-solid fa-comments"),
                 ]
             }
         ]
@@ -109,36 +103,46 @@ class Command(BaseCommand):
         Education.objects.all().delete()
         educations = [
             {
-                "degree": "Bachelor of Computer Applications / Computer Science",
-                "institution": "Gujarat University / Institute of Technology",
+                "degree": "Full Stack Python & Django Web Development",
+                "institution": "Tops Technologies",
                 "location": "Ahmedabad, Gujarat",
-                "start_year": "2023",
+                "start_year": "2025",
                 "end_year": "Present",
-                "gpa": "First Class",
-                "description": "Core Coursework: Python & Web Programming, Relational Database Management Systems (RDBMS), Data Structures, Algorithms, Software Engineering.",
+                "description": "Intensive hands-on practical track covering Django MVC architecture, RESTful API development, SQL, SQLite database management, JavaScript DOM manipulation, and responsive web design.",
                 "order": 1
             },
             {
-                "degree": "Full Stack Python & Django Web Development",
-                "institution": "Online Specialized Training & Hands-on Projects",
-                "location": "Online",
+                "degree": "Bachelor of Science - Computer Science & Information Technology",
+                "institution": "Silver Oak University",
+                "location": "Ahmedabad, Gujarat",
                 "start_year": "2024",
-                "end_year": "2024",
-                "gpa": "Certified",
-                "description": "Intensive hands-on practical track covering Django MVC architecture, RESTful API development, PostgreSQL, JavaScript DOM manipulation, and responsive web design.",
+                "end_year": "Present",
+                "gpa": "8.18",
+                "description": "Gaining the basic knowledge of coding.",
                 "order": 2
             },
             {
                 "degree": "Higher Secondary Certificate (HSC - 12th)",
-                "institution": "Gujarat Board (GSEB)",
+                "institution": "Shayona VidhyaVihar Higher Secondary School (GSEB)",
                 "location": "Ahmedabad, Gujarat",
-                "start_year": "2021",
-                "end_year": "2023",
-                "gpa": "Distinction",
-                "description": "Completed Higher Secondary with focus on Science, Mathematics, and Computer Applications.",
+                "start_year": "2022",
+                "end_year": "2024",
+                "gpa": "44%",
+                "description": "Completed Higher Secondary with focus on Physics, Chemistry, Mathematics",
                 "order": 3
+            },
+            {
+                "degree": "Secondary School Certificate (SSC - 10th)",
+                "institution": "Excelsior Model High School (GSEB)",
+                "location": "Adipur, Kutch, Gujarat",
+                "start_year": "2020",
+                "end_year": "2021",
+                "gpa": "58%",
+                "description": "Completed Secondary School",
+                "order": 4
             }
         ]
+        
         for edu in educations:
             Education.objects.create(**edu)
         self.stdout.write("Created Education records.")
@@ -148,146 +152,127 @@ class Command(BaseCommand):
         Project.objects.all().delete()
 
         cat_fullstack = ProjectCategory.objects.create(name="Full Stack", slug="full-stack", order=1)
-        cat_webapps = ProjectCategory.objects.create(name="Web Apps", slug="web-apps", order=2)
-        cat_apis = ProjectCategory.objects.create(name="APIs & Microservices", slug="apis", order=3)
+        cat_api = ProjectCategory.objects.create(name="RESTful APIs", slug="restful-apis", order=2)
+        cat_webapps = ProjectCategory.objects.create(name="Web Apps", slug="web-apps", order=3)
+        cat_cli = ProjectCategory.objects.create(name="Python & CLI", slug="python-cli", order=4)
+        cat_security = ProjectCategory.objects.create(name="Security & Tools", slug="security-tools", order=5)
 
         projects_data = [
             {
-                "category": cat_fullstack,
-                "title": "DevForge - Developer Workspace",
-                "slug": "devforge-developer-workspace",
-                "short_description": "Collaborative code snippet sharing, real-time reviews, and developer workspace built on Django and JavaScript.",
+                "category": cat_webapps,
+                "title": "To-Do-List",
+                "slug": "to-do-list",
+                "short_description": "Interactive task management web application built with Python, Django, and JavaScript featuring real-time task creation and status filtering.",
                 "detailed_description": (
-                    "DevForge is a full-featured collaborative platform built for engineering teams. It allows developers to create, "
-                    "organize, and peer-review code snippets with syntax highlighting, version diffing, and tag-based discovery. "
-                    "The backend leverages Django's robust ORM and security layers, while the frontend delivers a snappy, reactive user experience."
+                    "The To-Do-List application is an intuitive task management tool designed to streamline daily workflows. "
+                    "Features dynamic task creation, instant completion toggles, categorical filters (All, Active, Completed), "
+                    "and persistent database storage powered by Django ORM and clean responsive frontend design."
                 ),
                 "key_features": (
-                    "Instant syntax-highlighted code sharing\n"
-                    "Granular user permissions and team workspaces\n"
-                    "Interactive comment threads on specific code lines\n"
-                    "Automated tag indexing and full-text search"
+                    "Add, complete, edit, and delete tasks seamlessly\n"
+                    "Filter tasks by All, Active, and Completed views\n"
+                    "Responsive, mobile-friendly design with modern dark/light styling\n"
+                    "Clean Django MVT architecture with robust form validation"
                 ),
-                "image_url": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80",
-                "technologies": "Django, Python, PostgreSQL, JavaScript, CSS3, Prism.js",
-                "github_url": "https://github.com",
-                "live_demo_url": "https://demo.example.com",
+                "image_url": "/static/images/projects/todo-list.png",
+                "technologies": "Django, Python, HTML5, CSS3, JavaScript, SQLite",
+                "github_url": "https://github.com/Jainamsheth06/to-do-list",
+                "live_demo_url": "",
                 "featured": True,
                 "order": 1
             },
             {
-                "category": "Web Apps",
-                "title": "ShopSphere - E-Commerce Engine",
-                "slug": "shopsphere-ecommerce-engine",
-                "short_description": "Modern e-commerce platform with dynamic shopping cart, Stripe payment gateway, and customer order dashboard.",
+                "category": cat_fullstack,
+                "title": "Hospital Management System",
+                "slug": "hospital-management-system",
+                "short_description": "Comprehensive healthcare administration system managing patient records, doctor appointments, billing, and departmental workflows.",
                 "detailed_description": (
-                    "A production-ready e-commerce solution engineered with Django. Features multi-currency product catalogs, "
-                    "real-time stock management, coupon code verification, and secure Stripe checkout flows. "
-                    "Includes an administrative management dashboard for tracking orders, revenue metrics, and inventory alerts."
+                    "The Hospital Management System is a full-featured clinical management solution developed with Django and Python. "
+                    "It streamlines hospital operations by coordinating outpatient and inpatient admissions, appointment scheduling with doctors, "
+                    "medical department categorization, and automated invoice billing."
                 ),
                 "key_features": (
-                    "Real-time cart calculation and stock deduction\n"
-                    "End-to-end Stripe payment processing\n"
-                    "Customer order history with downloadable PDF invoices\n"
-                    "Product review and rating system"
+                    "Patient registration, medical history, and status tracking\n"
+                    "Doctor appointment scheduling with departmental categorization\n"
+                    "Automated billing, invoicing, and patient management\n"
+                    "Role-based access control for administrative staff and medical professionals"
                 ),
-                "image_url": "https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&w=800&q=80",
-                "technologies": "Django, Python, SQLite/PostgreSQL, HTML5, CSS3, JavaScript, Stripe API",
-                "github_url": "https://github.com",
-                "live_demo_url": "https://demo.example.com",
+                "image_url": "/static/images/projects/hospital-management.png",
+                "technologies": "Django, Python, PostgreSQL, HTML5, CSS3, JavaScript, Bootstrap",
+                "github_url": "https://github.com/Jainamsheth06/Hospital-Management-System",
+                "live_demo_url": "",
                 "featured": True,
                 "order": 2
             },
             {
-                "category": "APIs & Microservices",
-                "title": "PulseMetrics - API & System Monitor",
-                "slug": "pulsemetrics-api-system-monitor",
-                "short_description": "High-throughput API telemetry monitoring service with customizable health check endpoints and alert hooks.",
+                "category": cat_cli,
+                "title": "Auto-Sphere Car Rental System (Console App)",
+                "slug": "auto-sphere-car-rental-system",
+                "short_description": "Interactive terminal-based car rental and fleet management software developed in pure Python using Object-Oriented Programming (OOP) and menu-driven CLI workflows.",
                 "detailed_description": (
-                    "PulseMetrics collects and computes real-time performance telemetry for microservices. Built with Django REST Framework "
-                    "and Redis, it processes thousands of incoming status payloads per minute, visualizing latency distributions, status codes, "
-                    "and uptime uptime percentages with interactive SVG and Canvas charts."
+                    "Auto-Sphere Car Rental System is a console-based vehicle rental management application developed with Python. "
+                    "Built around core Object-Oriented Programming (OOP) principles, the system allows users to view live vehicle stock, rent cars across various categories (SUV, Sedan, EV), "
+                    "calculate duration-based rental tariffs (hourly/daily), record customer bookings, and generate structured billing receipts directly through an interactive command-line interface."
                 ),
                 "key_features": (
-                    "Sub-10ms response logging pipeline\n"
-                    "Automated email and webhook alert notifications on endpoint downtime\n"
-                    "Interactive metrics dashboard with historical trends\n"
-                    "Secure API key authentication and rate limiting"
+                    "Interactive menu-driven terminal interface with user input validation\n"
+                    "Object-Oriented Design (Car, Customer, RentalAgency, and Invoice classes)\n"
+                    "Dynamic rental pricing calculation based on rental duration and vehicle tier\n"
+                    "Vehicle stock returns, availability tracking, and automated receipt export"
                 ),
-                "image_url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
-                "technologies": "Django REST Framework, Python, Redis, Chart.js, Docker",
-                "github_url": "https://github.com",
-                "live_demo_url": "https://demo.example.com",
+                "image_url": "/static/images/projects/auto-sphere.png",
+                "technologies": "Python, OOP (Object-Oriented Programming), CLI / Console, File Handling, Data Structures",
+                "github_url": "https://github.com/Jainamsheth06/Auto-Sphere-Car-Rental-System",
+                "live_demo_url": "",
                 "featured": True,
                 "order": 3
             },
             {
-                "category": "Web Apps",
-                "title": "TaskFlow Pro - Agile Kanban Board",
-                "slug": "taskflow-pro-agile-kanban",
-                "short_description": "Intuitive drag-and-drop project tracker with sprint planning, task assignments, and activity timelines.",
+                "category": cat_security,
+                "title": "IntegritySentinel",
+                "slug": "integrity-sentinel",
+                "short_description": "Advanced cybersecurity file and system integrity monitoring (FIM) tool tracking cryptographic hash baseline alterations and unauthorized file modifications.",
                 "detailed_description": (
-                    "TaskFlow Pro delivers a seamless visual task management workflow. Utilizing HTML5 Drag and Drop API integrated with "
-                    "Django asynchronous backend endpoints, users can move task cards across swimlanes, assign story points, tag colleagues, "
-                    "and track project milestones."
+                    "IntegritySentinel is an automated cybersecurity and system integrity monitoring solution built with Python. "
+                    "It continuously tracks critical directories and system files, computes cryptographic hashes (SHA-256), detects unauthorized modifications, injections, or file tampering, and triggers real-time alerts upon detecting security violations."
                 ),
                 "key_features": (
-                    "HTML5 Drag & Drop board with instant backend synchronization\n"
-                    "Sprint velocity and burn-down chart generation\n"
-                    "Custom labels, checklists, and file attachments\n"
-                    "Dark/Light theme support with smooth micro-animations"
+                    "Real-time file change, deletion, and injection monitoring\n"
+                    "Cryptographic checksum verification (SHA-256 baseline)\n"
+                    "Automated security alert logs and anomaly reports\n"
+                    "Clean command-line and web dashboard interface"
                 ),
-                "image_url": "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&w=800&q=80",
-                "technologies": "Django, Vanilla JS, HTML5 Drag/Drop, CSS Grid & Flexbox",
-                "github_url": "https://github.com",
-                "live_demo_url": "https://demo.example.com",
-                "featured": False,
+                "image_url": "/static/images/projects/integrity-sentinel.png",
+                "technologies": "Python, Cryptography, Hashing, Django, SQLite, Linux/Windows Security",
+                "github_url": "https://github.com/Jainamsheth06/IntegritySentinel",
+                "live_demo_url": "",
+                "featured": True,
                 "order": 4
             },
             {
-                "category": "Full Stack",
-                "title": "CryptaWatch - Portfolio & Alert Hub",
-                "slug": "cryptawatch-portfolio-alert-hub",
-                "short_description": "Real-time cryptocurrency portfolio tracker integrating live price streams, profit/loss calculations, and price alerts.",
+                "category": cat_api,
+                "title": "DoctorFinder (RESTful API)",
+                "slug": "doctor-finder",
+                "short_description": "Scalable Django REST Framework (DRF) backend API powering doctor discovery, specialty filtering, real-time consultation slots, and patient booking.",
                 "detailed_description": (
-                    "CryptaWatch is a real-time tracking dashboard for crypto assets. The application fetches live market quotes "
-                    "from third-party APIs, computes weighted portfolio profit/loss margins, and provides automated browser alerts "
-                    "when custom user-defined price thresholds are crossed."
+                    "DoctorFinder RESTful API is an advanced backend web service engineered with Python and Django REST Framework (DRF). "
+                    "It delivers clean, secure, and performant RESTful endpoints to query verified doctors by medical specialty and location, "
+                    "check live appointment availability, handle booking transactions, and manage healthcare records with JSON serialization, "
+                    "token-based authentication, and robust validation rules."
                 ),
                 "key_features": (
-                    "Live multi-asset price feed tracking\n"
-                    "Dynamic P&L and asset allocation charts\n"
-                    "Configurable price alerts via Web Push and Email\n"
-                    "Historical valuation analytics"
+                    "RESTful CRUD API endpoints for doctors, specialties, and appointments\n"
+                    "Django REST Framework serializers with input validation and error handling\n"
+                    "Specialty, location, and rating filtering with query parameters\n"
+                    "Token/Session authentication and optimized database queries with pagination\n"
+                    "Interactive API documentation & Postman collection support"
                 ),
-                "image_url": "https://images.unsplash.com/photo-1621416894569-0f39ed31d247?auto=format&fit=crop&w=800&q=80",
-                "technologies": "Django, Python, JavaScript, CSS3, External Financial APIs",
-                "github_url": "https://github.com",
-                "live_demo_url": "https://demo.example.com",
-                "featured": False,
+                "image_url": "/static/images/projects/doctor-finder.png",
+                "technologies": "Django REST Framework, Python, RESTful APIs, SQL, SQLite, JSON, Postman",
+                "github_url": "https://github.com/Jainamsheth06/module-9--Python---DB-and-Python-Framework",
+                "live_demo_url": "",
+                "featured": True,
                 "order": 5
-            },
-            {
-                "category": "APIs & Microservices",
-                "title": "EcoRoute - Geo-Logistics Routing Engine",
-                "slug": "ecoroute-geo-logistics-engine",
-                "short_description": "High-performance geospatial routing API calculating carbon-optimized delivery paths for commercial fleets.",
-                "detailed_description": (
-                    "EcoRoute is a specialized REST API that evaluates delivery routes against carbon emission models, road topologies, "
-                    "and live traffic conditions. Fleet operators consume the API to cut fuel expenditures and minimize environmental footprints."
-                ),
-                "key_features": (
-                    "Carbon footprint calculation per route waypoint\n"
-                    "Comprehensive OpenAPI / Swagger interactive documentation\n"
-                    "High-concurrency caching with Redis\n"
-                    "JWT authentication and usage metering"
-                ),
-                "image_url": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80",
-                "technologies": "Django REST Framework, Python, PostGIS, Swagger, Docker",
-                "github_url": "https://github.com",
-                "live_demo_url": "https://demo.example.com",
-                "featured": False,
-                "order": 6
             }
         ]
 

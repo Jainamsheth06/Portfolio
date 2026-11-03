@@ -8,7 +8,7 @@
         <div class="hero-content">
             <div class="hero-badge">
                 <span class="pulse-indicator"></span>
-                <span>Available for Hire & Projects</span>
+                <span>Open to Work</span>
             </div>
 
             <h1 class="hero-title">
@@ -42,8 +42,10 @@
                 <div class="social-icons">
                     {% if profile.github_url %}<a href="{{ profile.github_url }}" target="_blank" rel="noopener noreferrer" title="GitHub" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>{% endif %}
                     {% if profile.linkedin_url %}<a href="{{ profile.linkedin_url }}" target="_blank" rel="noopener noreferrer" title="LinkedIn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>{% endif %}
+                    {% if profile.instagram_url %}<a href="{{ profile.instagram_url }}" target="_blank" rel="noopener noreferrer" title="Instagram" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>{% endif %}
                     {% if profile.twitter_url %}<a href="{{ profile.twitter_url }}" target="_blank" rel="noopener noreferrer" title="Twitter/X" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>{% endif %}
                     <a href="mailto:{{ profile.email }}" title="Email me" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+                    <a href="https://wa.me/{{ profile.whatsapp_number }}" target="_blank" rel="noopener noreferrer" title="Chat on WhatsApp" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
                 </div>
             </div>
         </div>
@@ -52,11 +54,7 @@
             <div class="avatar-wrapper">
                 <div class="avatar-ring"></div>
                 <div class="avatar-img-container">
-                    {% if profile.avatar %}
-                        <img src="{{ profile.avatar.url }}" alt="{{ profile.full_name }}" class="avatar-img">
-                    {% else %}
-                        <img src="{{ profile.avatar_url }}" alt="{{ profile.full_name }}" class="avatar-img">
-                    {% endif %}
+                    <img src="{% static 'images/profile.png' %}" alt="{{ profile.full_name }}" class="avatar-img">
                 </div>
 
                 <!-- Floating Tech Badges -->
@@ -87,8 +85,8 @@
         <div class="stat-card">
             <div class="stat-icon"><i class="fa-solid fa-user-graduate"></i></div>
             <div class="stat-info">
-                <h3 class="stat-number">Fresher</h3>
-                <p class="stat-label">Ready to Join</p>
+                <h3 class="stat-number">Final Year</h3>
+                <p class="stat-label">Fresher • Ready to Join</p>
             </div>
         </div>
 
@@ -103,7 +101,7 @@
         <div class="stat-card">
             <div class="stat-icon"><i class="fa-solid fa-code"></i></div>
             <div class="stat-info">
-                <h3 class="stat-number" data-target="15">15+</h3>
+                <h3 class="stat-number" data-target="9">9+</h3>
                 <p class="stat-label">Technologies Explored</p>
             </div>
         </div>
@@ -184,6 +182,14 @@
                         <span class="terminal-title">developer_profile.json</span>
                     </div>
 
+                    <div class="info-card-profile">
+                        <img src="{% static 'images/profile.png' %}" alt="{{ profile.full_name }}" class="info-card-avatar">
+                        <div>
+                            <h4 class="info-card-name">{{ profile.full_name }}</h4>
+                            <p class="info-card-role">{{ profile.title }}</p>
+                        </div>
+                    </div>
+
                     <div class="info-card-body">
                         <div class="info-row">
                             <span class="info-label"><i class="fa-solid fa-location-dot"></i> Location:</span>
@@ -195,11 +201,11 @@
                         </div>
                         <div class="info-row">
                             <span class="info-label"><i class="fa-solid fa-phone"></i> Phone:</span>
-                            <span class="info-val">{{ profile.phone }}</span>
+                            <span class="info-val"><a href="tel:{{ profile.phone_clean }}">{{ profile.phone }}</a></span>
                         </div>
                         <div class="info-row">
                             <span class="info-label"><i class="fa-solid fa-briefcase"></i> Status:</span>
-                            <span class="info-val status-active">Fresher • Ready to Join</span>
+                            <span class="info-val status-active">Final • Ready for Hire & Projects</span>
                         </div>
                         <div class="info-row">
                             <span class="info-label"><i class="fa-solid fa-language"></i> Languages:</span>
@@ -275,7 +281,7 @@
                         </div>
                         <div class="skill-item">
                             <div class="skill-header">
-                                <span class="skill-name"><i class="fa-solid fa-database"></i> PostgreSQL & SQLite</span>
+                                <span class="skill-name"><i class="fa-solid fa-database"></i> SQL & SQLite</span>
                                 <span class="skill-percentage">88%</span>
                             </div>
                             <div class="progress-bar-container"><div class="progress-bar-fill" data-progress="88%" style="width: 88%;"></div></div>
@@ -465,7 +471,7 @@
             <div class="contact-info-panel">
                 <h3 class="contact-panel-title">Let's talk about your next project</h3>
                 <p class="contact-panel-desc">
-                    I am actively available for software engineering roles, contract projects, and freelance engagements. Feel free to send a message or contact me directly through my social channels.
+                    I am actively available for software engineering roles, internships, and freelance projects. Feel free to send a message or contact me directly through my social channels.
                 </p>
 
                 <div class="contact-detail-items">
@@ -480,8 +486,12 @@
                     <div class="contact-item">
                         <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
                         <div>
-                            <span class="contact-item-label">Phone</span>
-                            <a href="tel:{{ profile.phone }}" class="contact-item-val">{{ profile.phone }}</a>
+                            <span class="contact-item-label">Phone & Quick Call</span>
+                            <a href="tel:{{ profile.phone_clean }}" class="contact-item-val" style="display: block; margin-bottom: 0.35rem;">{{ profile.phone }}</a>
+                            <div class="contact-actions-row">
+                                <a href="tel:{{ profile.phone_clean }}" class="btn-call-badge"><i class="fa-solid fa-phone-volume"></i> Call Now</a>
+                                <a href="https://wa.me/{{ profile.whatsapp_number }}" target="_blank" rel="noopener" class="btn-whatsapp-badge"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+                            </div>
                         </div>
                     </div>
 
@@ -508,6 +518,7 @@
                         {% if profile.github_url %}<a href="{{ profile.github_url }}" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a>{% endif %}
                         {% if profile.linkedin_url %}<a href="{{ profile.linkedin_url }}" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>{% endif %}
                         {% if profile.twitter_url %}<a href="{{ profile.twitter_url }}" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i></a>{% endif %}
+                        <a href="https://wa.me/{{ profile.whatsapp_number }}" target="_blank" rel="noopener" title="Chat on WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
                     </div>
                 </div>
             </div>
@@ -553,4 +564,3 @@
     </div>
 </section>
 {% endblock %}
-

@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,8 +19,9 @@
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+    <!-- Favicon & Social Preview -->
+    <link rel="icon" type="image/png" href="{% static 'images/profile.png' %}">
+    <meta property="og:image" content="{% static 'images/profile.png' %}">
 </head>
 <body>
     <!-- Background Ambient Glows -->
@@ -47,22 +48,17 @@
 
             <!-- Nav Controls -->
             <div class="nav-actions">
-                <!-- Theme Toggle Button -->
-                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light or dark theme" title="Toggle Theme">
-                    <i class="fa-solid fa-moon moon-icon"></i>
-                    <i class="fa-solid fa-sun sun-icon"></i>
-                </button>
-
-                <!-- Resume Download CTA -->
+                <!-- Resume Download CTA (if available) -->
                 {% if profile.resume_file %}
                     <a href="{{ profile.resume_file.url }}" download class="btn btn-outline btn-sm nav-cv-btn">
                         <i class="fa-solid fa-download"></i> Resume
                     </a>
-                {% else %}
-                    <a href="#contact" class="btn btn-primary btn-sm nav-cv-btn">
-                        <i class="fa-solid fa-envelope"></i> Hire Me
-                    </a>
                 {% endif %}
+
+                <!-- Hire Me CTA Button -->
+                <a href="#contact" class="btn btn-primary btn-sm nav-cv-btn" id="hire-me-nav-btn">
+                    <i class="fa-solid fa-paper-plane"></i> Hire Me
+                </a>
 
                 <!-- Mobile Hamburger Toggle -->
                 <button class="mobile-toggle" id="mobile-toggle" aria-label="Open Navigation Menu">
@@ -138,6 +134,7 @@
                         {% if profile.linkedin_url %}<a href="{{ profile.linkedin_url }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>{% endif %}
                         {% if profile.twitter_url %}<a href="{{ profile.twitter_url }}" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter"><i class="fa-brands fa-x-twitter"></i></a>{% endif %}
                         <a href="mailto:{{ profile.email }}" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+                        <a href="https://wa.me/{{ profile.whatsapp_number }}" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
                     </div>
                     <p class="footer-status-pill"><span class="pulse-indicator"></span> {{ profile.location }}</p>
                 </div>

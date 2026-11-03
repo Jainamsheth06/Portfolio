@@ -1,11 +1,9 @@
 /**
  * Portfolio Main JavaScript
- * Powers theme switching, typewriter effect, scroll animations,
- * filtering, modals, and AJAX form handling.
+ * Powers typewriter effect, scroll animations, filtering, modals, and AJAX form handling.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    initTheme();
     initNavbar();
     initTypewriter();
     initStatsCounter();
@@ -19,33 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ===================================================================
-   1. THEME SWITCHER (Dark / Light Mode)
-   =================================================================== */
-function initTheme() {
-    const themeToggleBtn = document.getElementById('theme-toggle');
-    const rootHtml = document.documentElement;
-
-    // Check saved theme or system preference
-    const savedTheme = localStorage.getItem('portfolio_theme');
-    if (savedTheme) {
-        rootHtml.setAttribute('data-theme', savedTheme);
-    } else {
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        rootHtml.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
-    }
-
-    if (themeToggleBtn) {
-        themeToggleBtn.addEventListener('click', () => {
-            const currentTheme = rootHtml.getAttribute('data-theme');
-            const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            rootHtml.setAttribute('data-theme', targetTheme);
-            localStorage.setItem('portfolio_theme', targetTheme);
-        });
-    }
-}
-
-/* ===================================================================
-   2. NAVBAR & MOBILE MENU & SCROLL SPY
+   1. NAVBAR & MOBILE MENU & SCROLL SPY
    =================================================================== */
 function initNavbar() {
     const navbar = document.getElementById('navbar');
@@ -53,6 +25,24 @@ function initNavbar() {
     const navMenu = document.getElementById('nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
     const sections = document.querySelectorAll('section[id]');
+    const hireMeBtn = document.getElementById('hire-me-nav-btn');
+
+    // Direct Smooth Scroll to Contact Details on "Hire Me" Click
+    if (hireMeBtn) {
+        hireMeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const contactSection = document.getElementById('contact');
+            if (contactSection) {
+                contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                setTimeout(() => {
+                    const nameInput = document.getElementById('contact-name');
+                    if (nameInput) {
+                        nameInput.focus();
+                    }
+                }, 500);
+            }
+        });
+    }
 
     // Mobile Hamburger Toggle
     if (mobileToggle && navMenu) {
@@ -170,6 +160,7 @@ function initStatsCounter() {
             if (entry.isIntersecting && !hasCounted) {
                 hasCounted = true;
                 statNumbers.forEach(counter => {
+                    if (!counter.hasAttribute('data-target')) return;
                     const target = parseInt(counter.getAttribute('data-target'), 10) || 0;
                     const suffix = counter.textContent.replace(/[0-9]/g, '');
                     let current = 0;
@@ -400,18 +391,33 @@ function initContactForm() {
         alertBox.style.display = 'none';
         alertBox.className = 'form-alert';
 
+        // Basic client validation
+        const nameInput = document.getElementById('contact-name');
+        const emailInput = document.getElementById('contact-email');
+        const subjectInput = document.getElementById('contact-subject');
+        const messageInput = document.getElementById('contact-message');
+
+        if (!nameInput?.value.trim() || !emailInput?.value.trim() || !subjectInput?.value.trim() || !messageInput?.value.trim()) {
+            alertBox.className = 'form-alert error';
+            alertBox.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Please fill in all required fields.';
+            alertBox.style.display = 'flex';
+            return;
+        }
+
         // Show loading spinner
         if (btnText) btnText.style.display = 'none';
         if (btnSpinner) btnSpinner.style.display = 'inline-flex';
         submitBtn.disabled = true;
 
         const formData = new FormData(form);
+        const csrfToken = form.querySelector('[name=csrfmiddlewaretoken]')?.value || '';
 
         try {
             const response = await fetch(form.action, {
                 method: 'POST',
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRFToken': csrfToken,
                     'Accept': 'application/json',
                 },
                 body: formData
@@ -424,6 +430,23 @@ function initContactForm() {
                 alertBox.innerHTML = `<i class="fa-solid fa-circle-check"></i> ${data.message}`;
                 alertBox.style.display = 'flex';
                 form.reset();
+
+                // Button success animation
+                submitBtn.classList.add('btn-success-state');
+                if (btnText) {
+                    btnText.innerHTML = '<i class="fa-solid fa-check"></i> Message Sent!';
+                    btnText.style.display = 'inline-flex';
+                }
+                if (btnSpinner) btnSpinner.style.display = 'none';
+
+                setTimeout(() => {
+                    submitBtn.classList.remove('btn-success-state');
+                    if (btnText) {
+                        btnText.innerHTML = '<i class="fa-regular fa-paper-plane"></i> Send Message';
+                    }
+                    submitBtn.disabled = false;
+                }, 4000);
+                return;
             } else {
                 alertBox.className = 'form-alert error';
                 alertBox.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Please verify the form inputs and try again.`;
@@ -441,12 +464,14 @@ function initContactForm() {
             }
         } catch (error) {
             alertBox.className = 'form-alert error';
-            alertBox.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> An unexpected network error occurred. Please try again.`;
+            alertBox.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Message could not be sent right now. Please email directly to <a href="mailto:jainamsheth2006@gmail.com" style="color:inherit; text-decoration:underline;">jainamsheth2006@gmail.com</a>`;
             alertBox.style.display = 'flex';
         } finally {
-            if (btnText) btnText.style.display = 'inline-flex';
-            if (btnSpinner) btnSpinner.style.display = 'none';
-            submitBtn.disabled = false;
+            if (!submitBtn.classList.contains('btn-success-state')) {
+                if (btnText) btnText.style.display = 'inline-flex';
+                if (btnSpinner) btnSpinner.style.display = 'none';
+                submitBtn.disabled = false;
+            }
         }
     });
 }
